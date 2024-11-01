@@ -2,20 +2,19 @@ package com.zedeck.ipftestscenario.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.Table;
+import lombok.*;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 
 import java.io.Serializable;
-
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "emplyees")
+@Entity
+@Table(name = "employees")
 @SQLDelete(sql = "UPDATE user_accounts SET deleted = true WHERE id = ?")
 public class Employee extends BaseEntity implements Serializable {
 

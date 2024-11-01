@@ -56,4 +56,7 @@ public class Response<T> {
                 '}';
     }
 
+    public boolean isSuccess() {
+        return true;
+    }
 }
