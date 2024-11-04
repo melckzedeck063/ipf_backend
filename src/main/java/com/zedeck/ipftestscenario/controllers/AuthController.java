@@ -2,6 +2,8 @@ package com.zedeck.ipftestscenario.controllers;
 
 import com.zedeck.ipftestscenario.dtos.LoginDto;
 import com.zedeck.ipftestscenario.dtos.LoginResponseDto;
+import com.zedeck.ipftestscenario.dtos.UserAccountDto;
+import com.zedeck.ipftestscenario.models.UserAccount;
 import com.zedeck.ipftestscenario.services.AuthService;
 import com.zedeck.ipftestscenario.utils.Response;
 import org.slf4j.Logger;
@@ -18,9 +20,6 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
-    private Logger logger = LoggerFactory.getLogger(AuthController.class);
-
-
 
     @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto){
@@ -28,6 +27,23 @@ public class AuthController {
         return ResponseEntity.ok().body(response);
     }
 
+    @PostMapping(path = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> registerUser(@RequestBody UserAccountDto userAccountDto){
+        Response<UserAccount> response = authService.registerUser(userAccountDto);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PutMapping(path = "/update-user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateUser(@RequestBody UserAccountDto userAccountDto){
+        Response<UserAccount> response = authService.updateUser(userAccountDto);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getProfile(){
+        Response<UserAccount> response = authService.getProfile();
+        return ResponseEntity.ok().body(response);
+    }
 
 }
 
